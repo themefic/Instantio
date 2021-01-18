@@ -61,14 +61,6 @@ if ( ! function_exists( 'wi_cart_count' ) ) {
 	}
 }
 
-/**
- * Cart Area function
- */
-if ( ! function_exists( 'wi_cart_inner' ) ) {
-	function wi_cart_inner() {
-		include plugin_dir_path( __FILE__ ) . '/templates/cart/cart.php';
-	}
-}
 
 /**
  * Assign Checkout Template
@@ -241,74 +233,6 @@ function wi_single_ajax_add_to_cart() {
 
 
 
-if( !function_exists( 'wi_custom_js' ) ){
-	function wi_custom_js(){
-
-		global $wiopt;
-
-
-		$output = "
-		(function($) {
-    		'use strict';
-    		jQuery(document).ready(function() { ";
-
-
-				    $output .= "
-			        // Single Product Ajax Cart
-			        $(document).on('click', '.single_add_to_cart_button:not(.disabled)', function (e) {
-			            e.preventDefault();
-
-			            var thisbutton = $(this),
-			                cart_form = thisbutton.closest('form.cart'),
-			                id = thisbutton.val(),
-			                product_qty = cart_form.find('input[name=quantity]').val() || 1,
-			                product_id = cart_form.find('input[name=product_id]').val() || id,
-			                variation_id = cart_form.find('input[name=variation_id]').val() || 0;
-
-			            var data = {
-			                action: 'wi_single_ajax_add_to_cart',
-			                product_id: product_id,
-			                product_sku: '',
-			                quantity: product_qty,
-			                variation_id: variation_id,
-			            };
-
-			            $(document.body).trigger('adding_to_cart', [thisbutton, data]);
-
-			            $.ajax({
-			                type: 'post',
-			                url: instantio_ajax_params.wi_ajax_url,
-			                data: data,
-			                beforeSend: function (response) {
-			                    thisbutton.removeClass('added').addClass('loading');
-			                },
-			                complete: function (response) {
-			                    thisbutton.addClass('added').removeClass('loading');
-			                },
-			                success: function (response) {
-			                    if (response.error & response.product_url) {
-			                        window.location = response.product_url;
-			                        return;
-			                    } else {
-			                        $(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, thisbutton]);
-			                    }
-			                },
-			            });
-
-			            return false;
-			        });
-				    ";
-
-
-		$output .= "
-			});
-		})(jQuery);" ;
-
-
-		wp_add_inline_script( 'wi-ajax-script', $output );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'wi_custom_js', 200 );
 
 /**
  * SVG Icons function

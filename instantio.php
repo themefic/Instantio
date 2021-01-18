@@ -57,12 +57,11 @@ function wooinstant_enqueue_scripts(){
 
 	$INSTANTIO_VERSION = current_time('timestamp');
 
-	wp_enqueue_style('instantio-stylesheet', plugin_dir_url( __FILE__ ) . 'assets/css/styles.css','',$INSTANTIO_VERSION );
-	wp_enqueue_script( 'instantio-drawer', plugin_dir_url( __FILE__ ) . 'assets/js/drawer.js', array('jquery'), $INSTANTIO_VERSION, true );
-    wp_enqueue_script( 'instantio-ajax-script', plugin_dir_url( __FILE__ ) . 'assets/js/wi-ajax-script.js', array('jquery'), $INSTANTIO_VERSION, true );
-	wp_enqueue_script('instantio-ajax-quick-view.js', plugin_dir_url(__FILE__) . 'assets/js/wi-ajax-quick-view.js', array('jquery'), $INSTANTIO_VERSION, true);
+	wp_enqueue_style('instantio-common-styles', plugin_dir_url( __FILE__ ) . 'assets/css/common.css','', $INSTANTIO_VERSION );
+	wp_enqueue_script( 'instantio-common-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/common.js', array('jquery'), $INSTANTIO_VERSION, true );
 
-	wp_localize_script( 'instantio-ajax-script', 'instantio_ajax_params',
+
+	wp_localize_script( 'instantio-common-scripts', 'instantio_ajax_params',
 		array(
 	        'wi_ajax_nonce' => wp_create_nonce( 'wi_ajax_nonce' ),
 	        'wi_ajax_url' => admin_url( 'admin-ajax.php' )
