@@ -158,7 +158,7 @@
 
         //Nav Toggler
         $(document).on('click', '#wi-toggler, .added_to_cart', function(e) {
-            e.preventDefault();
+            //e.preventDefault();
 
             var targetClass = $('#wi-toggler, .added_to_cart');
 

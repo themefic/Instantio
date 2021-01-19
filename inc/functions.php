@@ -63,86 +63,6 @@ if ( ! function_exists( 'wi_cart_count' ) ) {
 
 
 /**
- * Assign Checkout Template
- */
-add_filter( 'page_template', 'wicheckout_page_template' );
-function wicheckout_page_template( $page_template ){
-    if ( is_page( 'wooinstant-checkout' ) ) {
-
-    	add_filter('show_admin_bar', '__return_false');
-
-        $page_template = dirname( __FILE__ ) . '/templates/wi-checkout.php';
-    }
-    return $page_template;
-}
-
-/**
- * Get ID by page_slug
- */
-function get_id_by_slug($page_slug) {
-    $page = get_page_by_path($page_slug);
-    if ($page) {
-        return $page->ID;
-    } else {
-        return null;
-    }
-}
-
-/**
- * Create Checkout Page
- */
-add_action( 'init', 'wi_create_checkout_page' );
-function wi_create_checkout_page(){
-    if( get_page_by_title( 'wooinstant-checkout' ) == NULL ) {
-
-        $createWIcheckoutPage = array(
-          'post_title'    => 'wooinstant-checkout',
-          'post_content'  => "[woocommerce_checkout] <br>Please don't edit this page. This page reserved for Instantio Checkout Layout",
-          'post_status'   => 'publish',
-          'post_author'   => 1,
-          'post_type'     => 'page',
-          'post_name'     => 'wooinstant-checkout'
-        );
-
-        // Insert the post into the database
-        wp_insert_post( $createWIcheckoutPage );
-    }else{
-		// Update page for old users
-		$updateWIcheckoutPage = array(
-		    'ID'           => get_id_by_slug('wooinstant-checkout'),
-		    'post_content' => "[woocommerce_checkout] <br>Please don't edit this page. This page reserved for Instantio Checkout Layout",
-		);
-
-		wp_update_post( $updateWIcheckoutPage );
-    }
-}
-
-add_filter( 'display_post_states', 'wicheckout_add_post_state', 10, 2 );
-function wicheckout_add_post_state( $post_states, $post ) {
-	if( $post->post_name == 'wooinstant-checkout' ) {
-		$post_states[] = 'Instantio Checkout Page';
-	}
-	return $post_states;
-}
-
-
-/**
- * Checkout Area function
- */
-if ( ! function_exists( 'wi_checkout_inner' ) ) {
-	function wi_checkout_inner() {
-
-		$wiCheckoutUrl = esc_url( home_url('/wooinstant-checkout/') );
-
-		?>
-		<div class="wi-checkout-inner">
-			<button type="button" class="button alt" id="back_to_cart"><?php echo esc_attr('Back to cart','wooinstant'); ?></button>
-			<div id="wi-checkout-frame"><span class="wi-loader"><?php wi_svg_icon('spinner'); ?></span><iframe id="wi-iframe" src="<?php esc_url( $wiCheckoutUrl ); ?>" frameborder=0 scrolling=no ></iframe></div>
-		</div> <?php
-	}
-}
-
-/**
  * Add wooinstant-active class to body
  */
 function wi_body_classes( $classes ) {
@@ -151,13 +71,6 @@ function wi_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'wi_body_classes' );
 
-/**
- * Calculate Shipping on Update Order Review
- */
-function wi_action_woocommerce_checkout_update_order_review( $posted_data ) {
-    //WC()->cart->calculate_shipping();
-}
-add_action( 'woocommerce_checkout_update_order_review', 'wi_action_woocommerce_checkout_update_order_review', 10, 1 );
 
 /**
  *	Instantio Ajax functions

@@ -16,7 +16,6 @@
     font-size: 16px;
     color: #272727;
     position: absolute;
-    overflow: hidden;
     left: 0;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
@@ -50,18 +49,25 @@
 .wi-inner {
     height: 100%;
     overflow: hidden;
-    position: relative;
-    padding: 30px;
+    position: absolute;
+    padding: 0 30px;
     line-height: 1;
-    display: block;
     text-align: center;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
     background: #fff;
+    transform: translateX(100%);
+    transition: all .3s ease;
 }
 
 .wi-container.panel-open {
-    right: 0;
 }
 
+.wi-container.panel-open .wi-inner {
+    right: 100%;
+    transform: translateX(0);
+}
 
 #wi-cart-fly{
     position: absolute;
