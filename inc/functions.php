@@ -2,7 +2,6 @@
 /**
  * Instantio Functions
  *
- * @package WooInstant
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -140,9 +139,6 @@ function instantio_lite_single_ajax_add_to_cart() {
     wp_die();
 }
 
-
-
-
 /**
  * SVG Icons function
  *
@@ -187,7 +183,6 @@ if ( ! function_exists('instantio_lite_svg_icon') ) {
 	}
 }
 
-
 /**
  * Instantio Layout Design
  *
@@ -219,4 +214,4 @@ if ( !function_exists('instantio_lite_layout') ) {
 		endif;
 	}
 }
-add_action( 'wp_footer', 'instantio_lite_layout' );
+add_action( 'wp_footer', 'instantio_lite_layout', 10 );
