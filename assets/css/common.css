@@ -65,13 +65,17 @@
     height: 60px;
     top: 50%;
     z-index: -1;
+    right: 100%;
+}
+
+.wi-inner:hover {
+    background: #f5f5f5;
 }
 
 .wi-container.panel-open {
 }
 
 .wi-container.panel-open .wi-inner {
-    right: 100%;
     transform: translate(-69px,-50%);
     border-right: 0;
 }
@@ -179,14 +183,7 @@
  *
  */
 @media(max-width: 767px){
-    .wi-container{
-        width: 100%;
-        right: -100%;
-    }
-    .wi-cart-header.hascart.open {
-        left: 0;
-        z-index: 1;
-    }
+
     .wi-quick-view {
         left: 0 !important;
         margin: 0 auto;

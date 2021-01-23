@@ -65,8 +65,6 @@
                 $('.wi-container').addClass('panel-open');
                 $('html').addClass('wi-panel-open');
             }
-            //Update cart on Nav Toggle
-            jQuery('[name="update_cart"]').trigger('click'); // Update Cart
 
         });
 
