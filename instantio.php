@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Instantio Lite
  * Plugin URI: https://themefic.com/plugins/wooinstant/
- * Bitbucket Plugin URI: https://github.com/themefic/instantio
+ * Github Plugin URI: https://github.com/themefic/instantio
  * Description: Instantio converts multistep checkout into WooCommerce One Page Checkout. The Whole WooCommerce checkout process would take only 10-15 seconds. Yes, you heard it right! Only 10-15 Seconds! All your customer have to do is “Add to Cart”, a popup/cart drawer will appear with the cart view. Your customer can direct checkout WooCommerce based store and order from that single window!. No Page Reload whatsoever!
  * Author: BootPeople
  * Text Domain: instantio

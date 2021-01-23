@@ -197,7 +197,12 @@ if ( !function_exists('instantio_lite_layout') ) {
 			<div class="wi-container">
 
 				<div id="wi-toggler" class="wi-cart-header <?php if( WC()->cart->get_cart_contents_count() > 0 ){ echo 'hascart'; } ?>">
-					<?php if( $checkout_url ) : ?>
+
+
+					<?php instantio_lite_svg_icon('shopping_cart'); ?>
+					<?php echo instantio_lite_cart_count(); ?>
+				</div>
+				<?php if( $checkout_url ) : ?>
 						<a href="<?php echo $checkout_url; ?>" class="wi-inner">
 							<div class="wooinstant-content">
 								<?php esc_html_e( 'Checkout Now', 'instantio' ); ?>
@@ -205,13 +210,26 @@ if ( !function_exists('instantio_lite_layout') ) {
 						</a>
 					<?php endif; ?>
 
-					<?php instantio_lite_svg_icon('shopping_cart'); ?>
-					<?php echo instantio_lite_cart_count(); ?>
-				</div>
-
 			</div>
 			<?php
 		endif;
 	}
 }
 add_action( 'wp_footer', 'instantio_lite_layout', 10 );
+
+/**
+ * Change text strings
+ */
+function instantio_lite_change_view_cart_link( $params, $handle ) {
+
+	$checkout_url = wc_get_checkout_url();
+
+    switch ($handle) {
+        case 'wc-add-to-cart':
+            $params['i18n_view_cart'] = __('Go Checkout','instantio'); //chnage Name of view cart button
+            $params['cart_url'] = $checkout_url; //change URL of view cart button
+        break;
+    }
+    return $params;
+}
+add_filter( 'woocommerce_get_script_data', 'instantio_lite_change_view_cart_link',10,2 );
