@@ -1,0 +1,54 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Instantio Lite\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-23 07:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.0; wp-5.6"
+
+#. Author of the plugin
+msgid "BootPeople"
+msgstr ""
+
+#: inc/functions.php:208 instantio-lite/inc/functions.php:208
+msgid "Checkout Now"
+msgstr ""
+
+#: inc/functions.php:229 instantio-lite/inc/functions.php:229
+msgid "Go Checkout"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://psdtowpservice.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://themefic.com/plugins/wooinstant/"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Instantio converts multistep checkout into WooCommerce One Page Checkout. "
+"The Whole WooCommerce checkout process would take only 10-15 seconds. Yes, "
+"you heard it right! Only 10-15 Seconds! All your customer have to do is “Add "
+"to Cart”, a popup/cart drawer will appear with the cart view. Your customer "
+"can direct checkout WooCommerce based store and order from that single "
+"window!. No Page Reload whatsoever!"
+msgstr ""
+
+#. Name of the plugin
+msgid "Instantio Lite"
+msgstr ""
+
+#: instantio-lite/instantio.php:109
+msgid "Settings"
+msgstr ""

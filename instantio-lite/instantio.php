@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Instantio Lite
- * Plugin URI: https://themefic.com/plugins/wooinstant/
+ * Plugin URI: https://themefic.com/plugins/instantio/
  * Github Plugin URI: https://github.com/themefic/instantio
  * Description: Instantio converts multistep checkout into WooCommerce One Page Checkout. The Whole WooCommerce checkout process would take only 10-15 seconds. Yes, you heard it right! Only 10-15 Seconds! All your customer have to do is “Add to Cart”, a popup/cart drawer will appear with the cart view. Your customer can direct checkout WooCommerce based store and order from that single window!. No Page Reload whatsoever!
  * Author: BootPeople
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Define INSTANTIO_VERSION.
 if ( ! defined( 'INSTANTIO_VERSION' ) ) {
-	define( 'INSTANTIO_VERSION', '1.0.1' );
+	define( 'INSTANTIO_VERSION', '1.0.0' );
 }
 
 /**
@@ -41,12 +41,10 @@ function instantio_lite_plugin_loaded_action() {
 
 }
 
-
 /**
  *	Instantio Functions
  */
 require_once( dirname( __FILE__ ) . '/inc/functions.php' );
-
 
 /**
  *	Enqueue Instantio scripts
@@ -96,18 +94,3 @@ function instantio_lite_enqueue_scripts(){
 
 }
 add_filter( 'wp_enqueue_scripts', 'instantio_lite_enqueue_scripts' );
-
-
-/**
- * Add plugin action links.
- *
- * @since 1.0.0
- * @version 4.0.0
- */
-function instantio_lite_plugin_action_links( $links ) {
-	$plugin_links = array(
-		'<a href="admin.php?page=_instantio_lite">' . esc_html__( 'Settings', 'instantio' ) . '</a>',
-	);
-	return array_merge( $plugin_links, $links );
-}
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'instantio_lite_plugin_action_links' );
