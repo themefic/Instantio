@@ -9,8 +9,8 @@
  * Domain Path: /lang/
  * Author URI: https://psdtowpservice.com
  * Tags: instantio,responsive,woocommerce
- * Version: 1.0.0
- * WC tested up to: 4.9.0
+ * Version: 1.1
+ * WC tested up to: 4.9.2
  */
 
 // don't load directly
@@ -94,3 +94,18 @@ function instantio_lite_enqueue_scripts(){
 
 }
 add_filter( 'wp_enqueue_scripts', 'instantio_lite_enqueue_scripts' );
+
+/**
+ * Notice if WooCommerce is inactive
+ */
+function instantio_admin_notice_warn() {
+	if ( !class_exists( 'WooCommerce' ) ) { ?>
+	    <div class="notice notice-warning is-dismissible">
+	        <p>
+	        	<strong><?php esc_attr_e( 'Instantio requires WooCommerce to be activated ', 'wooinstant' ); ?> <a href="<?php echo esc_url( admin_url('/plugin-install.php?s=slug:woocommerce&tab=search&type=term') ); ?>">Install Now</a></strong>
+	        </p>
+	    </div> <?php
+    }
+
+}
+add_action( 'admin_notices', 'instantio_admin_notice_warn' );
