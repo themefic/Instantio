@@ -192,8 +192,7 @@ if ( !function_exists('instantio_lite_layout') ) {
 
 		$checkout_url = wc_get_checkout_url();
 
-
-		if ( class_exists('Woocommerce') ): ?>
+		if ( class_exists('Woocommerce') && !defined( 'WI_VERSION' ) ): ?>
 			<div class="wi-container">
 
 				<div id="wi-toggler" class="wi-cart-header <?php if( WC()->cart->get_cart_contents_count() > 0 ){ echo 'hascart'; } ?>">
@@ -232,4 +231,51 @@ function instantio_lite_change_view_cart_link( $params, $handle ) {
     }
     return $params;
 }
-add_filter( 'woocommerce_get_script_data', 'instantio_lite_change_view_cart_link',10,2 );
+add_filter( 'woocommerce_get_script_data', 'instantio_lite_change_view_cart_link', 10, 2 );
+
+/**
+ *	Custom CSS function
+ */
+if( !function_exists( 'instantio_lite_custom_css' ) ){
+	function instantio_lite_custom_css(){
+
+		if ( defined( 'WI_VERSION' ) ) {
+	        return;
+	    }
+
+		global $wiopt;
+		$output = '';
+
+
+		if( $wiopt["wi-header-bg"]  ) :
+			$output .= '
+			.wi-cart-header{
+				background-color: '.$wiopt["wi-header-bg"].';
+			}
+			';
+		endif;
+
+		if( $wiopt["wi-header-text-color"]  ) :
+			$output .= '
+			.wi-cart-header,
+			.wi-cart-header:not([href]):not([tabindex]){ /*for bootstrap override*/
+				color: '.$wiopt["wi-header-text-color"].';
+			}
+			';
+		endif;
+		if( $wiopt["wi-header-text-hovcolor"] != '' ) :
+			$output .= '
+			.wi-cart-header:hover,
+			.wi-cart-header:not([href]):not([tabindex]):hover,
+			.wi-cart-header:not([href]):not([tabindex]):focus{
+				color: '.$wiopt["wi-header-text-hovcolor"].';
+			}
+			';
+		endif;
+
+
+
+		wp_add_inline_style( 'instantio-common-styles', $output );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'instantio_lite_custom_css', 200 );

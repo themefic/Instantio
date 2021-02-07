@@ -9,7 +9,7 @@
  * Domain Path: /lang/
  * Author URI: https://psdtowpservice.com
  * Tags: instantio,responsive,woocommerce
- * Version: 1.1
+ * Version: 1.1.1
  * WC tested up to: 4.9.2
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Define INSTANTIO_VERSION.
 if ( ! defined( 'INSTANTIO_VERSION' ) ) {
-	define( 'INSTANTIO_VERSION', '1.0.0' );
+	define( 'INSTANTIO_VERSION', '1.1.1' );
 }
 
 /**
@@ -32,6 +32,11 @@ if ( ! defined( 'INSTANTIO_VERSION' ) ) {
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 /**
+ *	Instantio Functions
+ */
+require_once( dirname( __FILE__ ) . '/inc/functions.php' );
+
+/**
  * Loading Text Domain
  */
 add_action('plugins_loaded', 'instantio_lite_plugin_loaded_action', 10, 2);
@@ -39,12 +44,16 @@ function instantio_lite_plugin_loaded_action() {
 	//Internationalization
 	load_plugin_textdomain( 'instantio', false, dirname( plugin_basename(__FILE__) ) . '/lang/' );
 
-}
+	//Redux Framework calling
+	if ( !class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/inc/redux-framework/ReduxCore/framework.php' ) ) {
+	    require_once( dirname( __FILE__ ) . '/inc/redux-framework/ReduxCore/framework.php' );
+	}
 
-/**
- *	Instantio Functions
- */
-require_once( dirname( __FILE__ ) . '/inc/functions.php' );
+    // Load the plugin options
+    if ( file_exists( dirname( __FILE__ ) . '/inc/options-init.php' ) ) {
+        require_once dirname( __FILE__ ) . '/inc/options-init.php';
+    }
+}
 
 /**
  *	Enqueue Instantio scripts
@@ -52,11 +61,14 @@ require_once( dirname( __FILE__ ) . '/inc/functions.php' );
  */
 function instantio_lite_enqueue_scripts(){
 
+	if ( defined( 'WI_VERSION' ) ) {
+		return;
+	}
+
 	$INSTANTIO_VERSION = current_time('timestamp');
 
 	wp_enqueue_style('instantio-common-styles', plugin_dir_url( __FILE__ ) . 'assets/css/common.css','', $INSTANTIO_VERSION );
 	wp_enqueue_script( 'instantio-common-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/common.js', array('jquery'), $INSTANTIO_VERSION, true );
-
 
 	wp_localize_script( 'instantio-common-scripts', 'instantio_ajax_params',
 		array(
@@ -109,3 +121,17 @@ function instantio_admin_notice_warn() {
 
 }
 add_action( 'admin_notices', 'instantio_admin_notice_warn' );
+
+/**
+ * Add plugin action links.
+ *
+ * @since 1.0.0
+ * @version 4.0.0
+ */
+function instantio_plugin_action_links( $links ) {
+	$plugin_links = array(
+		'<a href="admin.php?page=_woinstant">' . esc_html__( 'Settings', 'wooinstant' ) . '</a>',
+	);
+	return array_merge( $plugin_links, $links );
+}
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'instantio_plugin_action_links' );
