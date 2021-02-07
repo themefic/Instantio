@@ -2,7 +2,6 @@
 /**
  * Instantio Functions
  *
- * @package WooInstant
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,27 +9,23 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Instantio Cart Fragments
  */
-function wooinstant_cart_fragments( $fragments ) {
+function instantio_lite_cart_fragments( $fragments ) {
 	global $woocommerce;
 
     ob_start();
-    wi_cart_count();
+    instantio_lite_cart_count();
     $fragments['span.wi_cart_total'] = ob_get_clean();
-
-    /*ob_start();
-    wi_checkout_inner();
-    $fragments['div.wi-checkout-inner'] = ob_get_clean();*/
 
     return $fragments;
 
 }
-add_filter( 'woocommerce_add_to_cart_fragments', 'wooinstant_cart_fragments', 10, 1 );
+add_filter( 'woocommerce_add_to_cart_fragments', 'instantio_lite_cart_fragments', 10, 1 );
 
 /**
  * Cart Count function
  */
-if ( ! function_exists( 'wi_cart_count' ) ) {
-	function wi_cart_count() { ?>
+if ( ! function_exists( 'instantio_lite_cart_count' ) ) {
+	function instantio_lite_cart_count() { ?>
 		<span class="wi_cart_total">
 			<script type='text/javascript'>
 			/* <![CDATA[ */
@@ -65,22 +60,22 @@ if ( ! function_exists( 'wi_cart_count' ) ) {
 /**
  * Add wooinstant-active class to body
  */
-function wi_body_classes( $classes ) {
+function instantio_lite_body_classes( $classes ) {
 	$classes[] = 'wooinstant-active';
 	return $classes;
 }
-add_filter( 'body_class', 'wi_body_classes' );
+add_filter( 'body_class', 'instantio_lite_body_classes' );
 
 
 /**
  *	Instantio Ajax functions
  */
 // variable product quick view ajax actions
-add_action('wp_ajax_wi_variable_product_quick_view', 'wi_ajax_quickview_variable_products');
-add_action('wp_ajax_nopriv_wi_variable_product_quick_view', 'wi_ajax_quickview_variable_products');
+add_action('wp_ajax_wi_variable_product_quick_view', 'instantio_lite_ajax_quickview_variable_products');
+add_action('wp_ajax_nopriv_wi_variable_product_quick_view', 'instantio_lite_ajax_quickview_variable_products');
 
 // variable product quick view ajax function
-function wi_ajax_quickview_variable_products(){
+function instantio_lite_ajax_quickview_variable_products(){
 	global $post, $product, $woocommerce;
 	check_ajax_referer( 'wi_ajax_nonce', 'security', false );
 
@@ -111,11 +106,11 @@ function wi_ajax_quickview_variable_products(){
 }
 
 // single product ajax add to cart actions
-add_action('wp_ajax_wi_single_ajax_add_to_cart', 'wi_single_ajax_add_to_cart');
-add_action('wp_ajax_nopriv_wi_single_ajax_add_to_cart', 'wi_single_ajax_add_to_cart');
+add_action('wp_ajax_wi_single_ajax_add_to_cart', 'instantio_lite_single_ajax_add_to_cart');
+add_action('wp_ajax_nopriv_wi_single_ajax_add_to_cart', 'instantio_lite_single_ajax_add_to_cart');
 
 // single product ajax add to cart actions
-function wi_single_ajax_add_to_cart() {
+function instantio_lite_single_ajax_add_to_cart() {
 
     $product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
     $quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
@@ -144,16 +139,13 @@ function wi_single_ajax_add_to_cart() {
     wp_die();
 }
 
-
-
-
 /**
  * SVG Icons function
  *
  * @return  string
  */
-if ( ! function_exists('wi_get_svg_icon') ) {
-	function wi_get_svg_icon( $icon = null ){
+if ( ! function_exists('instantio_lite_get_svg_icon') ) {
+	function instantio_lite_get_svg_icon( $icon = null ){
 
 		if ( ! $icon ) {
 			return;
@@ -184,10 +176,60 @@ if ( ! function_exists('wi_get_svg_icon') ) {
 /**
  * SVG Icon display
  *
- * @return  void
  */
-if ( ! function_exists('wi_svg_icon') ) {
-	function wi_svg_icon( $icon = null ){
-		echo wi_get_svg_icon( $icon );
+if ( ! function_exists('instantio_lite_svg_icon') ) {
+	function instantio_lite_svg_icon( $icon = null ){
+		echo instantio_lite_get_svg_icon( $icon );
 	}
 }
+
+/**
+ * Instantio Layout Design
+ *
+ */
+if ( !function_exists('instantio_lite_layout') ) {
+	function instantio_lite_layout( ){
+
+		$checkout_url = wc_get_checkout_url();
+
+
+		if ( class_exists('Woocommerce') ): ?>
+			<div class="wi-container">
+
+				<div id="wi-toggler" class="wi-cart-header <?php if( WC()->cart->get_cart_contents_count() > 0 ){ echo 'hascart'; } ?>">
+
+
+					<?php instantio_lite_svg_icon('shopping_cart'); ?>
+					<?php echo instantio_lite_cart_count(); ?>
+				</div>
+				<?php if( $checkout_url ) : ?>
+						<a href="<?php echo $checkout_url; ?>" class="wi-inner">
+							<div class="wooinstant-content">
+								<?php esc_html_e( 'Checkout Now', 'instantio' ); ?>
+							</div>
+						</a>
+					<?php endif; ?>
+
+			</div>
+			<?php
+		endif;
+	}
+}
+add_action( 'wp_footer', 'instantio_lite_layout', 10 );
+
+/**
+ * Change text strings
+ */
+function instantio_lite_change_view_cart_link( $params, $handle ) {
+
+	$checkout_url = wc_get_checkout_url();
+
+    switch ($handle) {
+        case 'wc-add-to-cart':
+            $params['i18n_view_cart'] = __('Go Checkout','instantio'); //chnage Name of view cart button
+            $params['cart_url'] = $checkout_url; //change URL of view cart button
+        break;
+    }
+    return $params;
+}
+add_filter( 'woocommerce_get_script_data', 'instantio_lite_change_view_cart_link',10,2 );
