@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce-one-page-checkout, woocommerce-direct-checkout, direct-checkout-woocommerce, direct-checkout-for-woocommerce, woocommerce-one-click-checkout, woocommerce-quick-checkout, woocommerce-express-checkout, woocommerce-simple-checkout, woocommerce-one-page, wordpress-one-page-checkout, skip-cart-page-woocommerce, woocommerce-multistep-checkout, multistep-checkout-for-woocommerce, edit-woocommerce-checkout-page
 Requires at least: 4.0
 Tested up to: 5.6.1
-Stable tag: 1.0.0
+Stable tag: 1.1
 Requires PHP: 5.4
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -170,8 +170,6 @@ Yes, Instantio offers a simple checkout WooCommerce solution. You can also <stro
 =  =
 
 
-
-
 == Screenshots ==
 
 1. Direct Checkout Button
@@ -180,7 +178,19 @@ Yes, Instantio offers a simple checkout WooCommerce solution. You can also <stro
 4. Ajax cart on single product
 5. RTL Support
 
+
 == Changelog ==
+
+= 1.1.1 = ( Feb 08, 2021 )
+- Added: Option Panel Added
+- Added: Option - Cart Button Text
+- Added: Option - Cart Toggler Background
+- Added: Option - Cart Toggler Text Color
+- Added: Option - Cart Toggler Text Hover Color
+- Added: Option - Import Options
+- Added: Option - Export Options
+- Added: Some Functions
+
 
 = 1.1 = ( Feb 06, 2021 )
 - fixed: WooCommerce Require Notice

@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: Instantio Lite
- * Plugin URI: https://themefic.com/plugins/instantio/
+ * Plugin URI: https://live.themefic.com/instantio/
  * Github Plugin URI: https://github.com/themefic/instantio
- * Description: Instantio converts multistep checkout into WooCommerce One Page Checkout. The Whole WooCommerce checkout process would take only 10-15 seconds. Yes, you heard it right! Only 10-15 Seconds! All your customer have to do is “Add to Cart”, a popup/cart drawer will appear with the cart view. Your customer can direct checkout WooCommerce based store and order from that single window!. No Page Reload whatsoever!
- * Author: BootPeople
+ * Description: Instantio converts multistep checkout into WooCommerce One Page Checkout / WooCommerce Direct Checkout. The Whole WooCommerce checkout process would take only 10-15 seconds. Yes, you heard it right! Only 10-15 Seconds! All your customer have to do is “Add to Cart”, a cart drawer will appear with the checkout button. Your customer can Direct Checkout WooCommerce based store and order from a single page!
+ * Author: Themefic
  * Text Domain: instantio
  * Domain Path: /lang/
- * Author URI: https://psdtowpservice.com
- * Tags: instantio,responsive,woocommerce
+ * Author URI: https://themefic.com
+ * Tags: woocommerce-one-page-checkout, woocommerce-direct-checkout, direct-checkout-woocommerce, direct-checkout-for-woocommerce, woocommerce-one-click-checkout, woocommerce-quick-checkout, woocommerce-express-checkout, woocommerce-simple-checkout, woocommerce-one-page, wordpress-one-page-checkout, skip-cart-page-woocommerce, woocommerce-multistep-checkout, multistep-checkout-for-woocommerce, edit-woocommerce-checkout-page
  * Version: 1.1.1
  * WC tested up to: 4.9.2
  */
