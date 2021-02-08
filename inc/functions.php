@@ -204,7 +204,7 @@ if ( !function_exists('instantio_lite_layout') ) {
 				<?php if( $checkout_url ) : ?>
 						<a href="<?php echo $checkout_url; ?>" class="wi-inner">
 							<div class="wooinstant-content">
-								<?php esc_html_e( 'Checkout Now', 'instantio' ); ?>
+								<?php echo apply_filters( 'instantio_checkout_text', esc_html( 'Checkout Now', 'instantio' ) ); ?>
 							</div>
 						</a>
 					<?php endif; ?>
@@ -232,6 +232,20 @@ function instantio_lite_change_view_cart_link( $params, $handle ) {
     return $params;
 }
 add_filter( 'woocommerce_get_script_data', 'instantio_lite_change_view_cart_link', 10, 2 );
+
+/**
+ * Checkout Now text
+ */
+function instantio_checkout_text_filter( $text ){
+	global $wiopt;
+
+	if ( isset( $wiopt['cart_button_text'] ) && $wiopt['cart_button_text'] != "" ) {
+		$text = $wiopt['cart_button_text'];
+	}
+
+	return $text;
+}
+add_filter( 'instantio_checkout_text', 'instantio_checkout_text_filter' );
 
 /**
  *	Custom CSS function

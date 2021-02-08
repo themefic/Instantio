@@ -162,6 +162,7 @@ function instantio_lite_option_init(){
                 'type'     => 'text',
                 'title'    => __( 'Cart Button Text', 'instantio' ),
                 'default'   => 'Checkout Now',
+                'desc'   => __( 'Default: <code>Checkout Now</code>', 'instantio' )
             ),
         )
     ) );

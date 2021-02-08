@@ -3,7 +3,7 @@ Contributors: themefic, psdtowpservice, mdshuvo, kamrul0424
 Donate link:
 Tags: woocommerce-one-page-checkout, woocommerce-direct-checkout, direct-checkout-woocommerce, direct-checkout-for-woocommerce, woocommerce-one-click-checkout, woocommerce-quick-checkout, woocommerce-express-checkout, woocommerce-simple-checkout, woocommerce-one-page, wordpress-one-page-checkout, skip-cart-page-woocommerce, woocommerce-multistep-checkout, multistep-checkout-for-woocommerce, edit-woocommerce-checkout-page
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.6.1
 Stable tag: 1.0.0
 Requires PHP: 5.4
 License: GPL-2.0+
